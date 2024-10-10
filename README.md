@@ -55,6 +55,9 @@ public class YandexTest {
 
 •	Используй класс Actions, чтобы скроллить страницу до найденных элементов
 
+#### Для отчета jacoco:
+
+mvn clean test jacoco:report
 
 
 

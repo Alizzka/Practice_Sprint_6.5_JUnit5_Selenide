@@ -5,12 +5,19 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
-
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Condition.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
+import pageobjects.MainPage;
+
 public class Variant2Test {
+
+    private MainPage mainPage;
+
+    private WebDriver driver;
 
     @BeforeEach
     public void setup() {
@@ -18,6 +25,7 @@ public class Variant2Test {
         Configuration.browser = "chrome";
         Configuration.headless = false;
         Configuration.timeout = 5000;
+        mainPage = PageFactory.initElements(driver, MainPage.class);
     }
 
     @AfterEach

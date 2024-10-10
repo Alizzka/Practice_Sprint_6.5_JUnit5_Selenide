@@ -6,16 +6,22 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
+import pageobjects.MainPage;
 import java.util.stream.Stream;
-
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
+import pageobjects.MainPage;
 
 public class Variant3Test {
+
+    private MainPage mainPage;
+
+    private WebDriver driver;
 
     @BeforeEach
     public void setup() {
@@ -24,6 +30,7 @@ public class Variant3Test {
         Configuration.headless = false;
         Configuration.timeout = 5000;         // Устанавливаем таймаут ожидания элементов
         open("https://qa-scooter.praktikum-services.ru/");
+        mainPage = PageFactory.initElements(driver, MainPage.class);
     }
 
     @AfterEach

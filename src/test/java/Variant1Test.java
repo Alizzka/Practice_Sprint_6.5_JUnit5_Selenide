@@ -1,20 +1,28 @@
-import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.*;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
+import pageobjects.MainPage;
 
 public class Variant1Test {
+
+    private MainPage mainPage;
+    private WebDriver driver;
 
     @BeforeEach
     public void setup() {
         Configuration.browser = "chrome"; // Устанавливаем браузер
         Configuration.headless = false; // Открытие браузера в видимом режиме
         Configuration.timeout = 5000; // Установка тайм-аута для ожидания элементов
+        mainPage = PageFactory.initElements(driver, MainPage.class);
     }
 
     @AfterEach
