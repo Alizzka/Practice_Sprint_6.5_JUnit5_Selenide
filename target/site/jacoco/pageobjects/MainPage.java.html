@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MainPage.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">SelenideJunitTest</a> &gt; <a href="index.source.html" class="el_package">pageobjects</a> &gt; <span class="el_source">MainPage.java</span></div><h1>MainPage.java</h1><pre class="source lang-java linenums">package pageobjects;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import java.time.Duration;
+import java.util.HashMap;
+
+public class MainPage {
+
+    private final WebDriver driver;
+
+    // Локаторы вопросов с 1 - 8 из раздела &quot;Вопросы о важном&quot;:
+<span class="fc" id="L14">    public final static By Question_1 = By.id(&quot;accordion__heading-0&quot;);</span>
+<span class="fc" id="L15">    public final static By Question_2 = By.id(&quot;accordion__heading-1&quot;);</span>
+<span class="fc" id="L16">    public final static By Question_3 = By.id(&quot;accordion__heading-2&quot;);</span>
+<span class="fc" id="L17">    public final static By Question_4 = By.id(&quot;accordion__heading-3&quot;);</span>
+<span class="fc" id="L18">    public final static By Question_5 = By.id(&quot;accordion__heading-4&quot;);</span>
+<span class="fc" id="L19">    public final static By Question_6 = By.id(&quot;accordion__heading-5&quot;);</span>
+<span class="fc" id="L20">    public final static By Question_7 = By.id(&quot;accordion__heading-6&quot;);</span>
+<span class="fc" id="L21">    public final static By Question_8 = By.id(&quot;accordion__heading-7&quot;);</span>
+
+    // Локаторы ответов с 1 - 8 на вопросы из раздела &quot;Вопросы о важном&quot;:
+<span class="fc" id="L24">    private final static By Answer_1 = By.xpath(&quot;/html/body/div/div/div/div[5]/div[2]/div/div[1]/div[2]/p&quot;);</span>
+<span class="fc" id="L25">    private final static By Answer_2 = By.xpath(&quot;/html/body/div/div/div/div[5]/div[2]/div/div[2]/div[2]/p&quot;);</span>
+<span class="fc" id="L26">    private final static By Answer_3 = By.xpath(&quot;/html/body/div/div/div/div[5]/div[2]/div/div[3]/div[2]/p&quot;);</span>
+<span class="fc" id="L27">    private final static By Answer_4 = By.xpath(&quot;/html/body/div/div/div/div[5]/div[2]/div/div[4]/div[2]/p&quot;);</span>
+<span class="fc" id="L28">    private final static By Answer_5 = By.xpath(&quot;/html/body/div/div/div/div[5]/div[2]/div/div[5]/div[2]/p&quot;);</span>
+<span class="fc" id="L29">    private final static By Answer_6 = By.xpath(&quot;/html/body/div/div/div/div[5]/div[2]/div/div[6]/div[2]/p&quot;);</span>
+<span class="fc" id="L30">    private final static By Answer_7 = By.xpath(&quot;/html/body/div/div/div/div[5]/div[2]/div/div[7]/div[2]/p&quot;);</span>
+<span class="fc" id="L31">    private final static By Answer_8 = By.xpath(&quot;/html/body/div/div/div/div[5]/div[2]/div/div[8]/div[2]/p&quot;);</span>
+
+    // Ключ: значение (вопрос: ответ):
+<span class="fc" id="L34">    static HashMap&lt;By, By&gt; map = new HashMap&lt;&gt;();</span>
+    static {
+<span class="fc" id="L36">        map.put(Question_1, Answer_1);</span>
+<span class="fc" id="L37">        map.put(Question_2, Answer_2);</span>
+<span class="fc" id="L38">        map.put(Question_3, Answer_3);</span>
+<span class="fc" id="L39">        map.put(Question_4, Answer_4);</span>
+<span class="fc" id="L40">        map.put(Question_5, Answer_5);</span>
+<span class="fc" id="L41">        map.put(Question_6, Answer_6);</span>
+<span class="fc" id="L42">        map.put(Question_7, Answer_7);</span>
+<span class="fc" id="L43">        map.put(Question_8, Answer_8);</span>
+<span class="fc" id="L44">    }</span>
+
+<span class="fc" id="L46">    public MainPage(WebDriver driver) {</span>
+<span class="fc" id="L47">        this.driver = driver;</span>
+<span class="fc" id="L48">    }</span>
+
+    // Скролим главную страницу до первого вопроса:
+    /*public void scrollMainPage() {
+        ((JavascriptExecutor) driver).executeScript(&quot;arguments[0].scrollIntoView();&quot;,
+                driver.findElement(Question_1));
+    }
+
+    // Открыть элемент списка вопросов, ждем появления текста с ответом:
+    public String getAnswer(By questionLocator) {
+        driver.findElement(questionLocator).click();
+        new WebDriverWait(driver, Duration.ofSeconds(15)).until(driver -&gt;
+                driver.findElement(map.get(questionLocator)).getText() != null
+                        &amp;&amp; !driver.findElement(map.get(questionLocator)).getText().isEmpty());
+        return driver.findElement(map.get(questionLocator)).getText();
+    }
+
+    // Новый метод для получения ответа на вопрос по тексту:
+    public String getAnswerForQuestion(String question) {
+        // Логика получения ответа на вопрос
+        // Предполагаем, что вопрос будет использоваться для получения локатора
+        // В реальной реализации можно использовать поиск в мапе или другой подход
+        for (By questionLocator : map.keySet()) {
+            if (driver.findElement(questionLocator).getText().contains(question)) {
+                return getAnswer(questionLocator);
+            }
+        }
+        return &quot;Ответ не найден&quot;;
+    }*/
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
