@@ -8,7 +8,6 @@ import com.codeborne.selenide.SelenideElement;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Condition.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import pageobjects.MainPage;
